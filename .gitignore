@@ -1,68 +1,26 @@
-*~
-*.sw[mnpcod]
-*.log
-*.lock
-*.tmp
-*.tmp.*
-log.txt
-*.sublime-project
-*.sublime-workspace
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-.idea/
-.vscode/
-.sass-cache/
-.versions/
-coverage/
-collection/
-dist/
-dist-transpiled/
-node_modules/
-tmp/
-temp/
-core/theme-builder/
-core/test-components/
-core/css/
-angular/css/
-$RECYCLE.BIN/
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
 
+# testing
+/coverage
+
+# production
+/build
+
+# misc
 .DS_Store
-Thumbs.db
-UserInterfaceState.xcuserstate
-.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.vscode
 
-.package.tmp.json
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-src/themes/version.scss
-scripts/e2e/webpackEntryPoints.json
-scripts/build/e2e-generated-tsconfig.json
-*.css.ts
-
-stats.json
-
-# demo stuff
-demos/node_modules
-demos/polyfills
-demos/css
-demos/fonts
-demos/src/**/*.js
-demos/src/**/*.map
-demos/src/**/*.ngfactory.ts
-demos/src/**/*.d.ts
-demos/src/**/*.metadata.json
-demos/src/**/*.css.shim.ts
-prerender.html
-prerender-domino.html
-prerender-hydrated.html
-prerender-static.html
-
-# stencil
-angular/css/
-packages/react/css/
-packages/vue/css/
-core/css/
-core/hydrate/
-core/loader/
-core/www/
-.stencil/
-angular/build/
-core/components/
+.idea
