@@ -24,6 +24,9 @@ interface ItemEditProps extends RouteComponentProps<{
 const ItemEdit: React.FC<ItemEditProps> = ({ history, match }) => {
   const { items, saving, savingError, saveItem } = useContext(ItemContext);
   const [name, setName] = useState('');
+  const [length, setLength] = useState(0);
+  const [releaseDate, setReleaseDate] = useState('');
+  const [isWatched, setIsWatched] = useState('');
   const [item, setItem] = useState<ItemProps>();
   useEffect(() => {
     log('useEffect');
@@ -32,10 +35,13 @@ const ItemEdit: React.FC<ItemEditProps> = ({ history, match }) => {
     setItem(item);
     if (item) {
       setName(item.name);
+      setLength(item.length);
+      setReleaseDate(item.releaseDate);
+      setIsWatched(item.isWatched);
     }
   }, [match.params.id, items]);
   const handleSave = () => {
-    const editedItem = item ? { ...item, name } : { name };
+    const editedItem = item ? { ...item, name, length, releaseDate, isWatched } : { name, length, releaseDate, isWatched };
     saveItem && saveItem(editedItem).then(() => history.goBack());
   };
   log('render');
