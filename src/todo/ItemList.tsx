@@ -1,26 +1,15 @@
-import React, { useContext } from 'react';
-import { RouteComponentProps } from 'react-router';
-import {
-  IonContent,
-  IonFab,
-  IonFabButton,
-  IonHeader,
-  IonIcon,
-  IonList, IonLoading,
-  IonPage,
-  IonTitle,
-  IonToolbar
-} from '@ionic/react';
+import React from 'react';
+import { IonContent, IonFab, IonFabButton, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { add } from 'ionicons/icons';
 import Item from './Item';
 import { getLogger } from '../core';
-import { ItemContext } from './ItemProvider';
+import { useItems } from './useItems';
 
 const log = getLogger('ItemList');
 
-const ItemList: React.FC<RouteComponentProps> = ({ history }) => {
-  const { items, fetching, fetchingError } = useContext(ItemContext);
-  log('render');
+const ItemList: React.FC = () => {
+  const { items, addItem } = useItems();
+  log('ItemList render');
   return (
     <IonPage>
       <IonHeader>
@@ -29,18 +18,9 @@ const ItemList: React.FC<RouteComponentProps> = ({ history }) => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonLoading isOpen={fetching} message="Fetching items" />
-        {items && (
-          <IonList>
-            {items.map(({ id, name}) =>
-              <Item key={id} id={id} name={name} onEdit={id => history.push(`/item/${id}`)} />)}
-          </IonList>
-        )}
-        {fetchingError && (
-          <div>{fetchingError.message || 'Failed to fetch items'}</div>
-        )}
+        {items.map(({ id, text}) => <Item key={id} text={text} />)}
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
-          <IonFabButton onClick={() => history.push('/item')}>
+          <IonFabButton onClick={addItem}>
             <IonIcon icon={add} />
           </IonFabButton>
         </IonFab>

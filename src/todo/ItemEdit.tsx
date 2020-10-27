@@ -23,7 +23,7 @@ interface ItemEditProps extends RouteComponentProps<{
 
 const ItemEdit: React.FC<ItemEditProps> = ({ history, match }) => {
   const { items, saving, savingError, saveItem } = useContext(ItemContext);
-  const [name, setName] = useState('');
+  const [text, setText] = useState('');
   const [item, setItem] = useState<ItemProps>();
   useEffect(() => {
     log('useEffect');
@@ -31,11 +31,11 @@ const ItemEdit: React.FC<ItemEditProps> = ({ history, match }) => {
     const item = items?.find(it => it.id === routeId);
     setItem(item);
     if (item) {
-      setName(item.name);
+      setText(item.text);
     }
   }, [match.params.id, items]);
   const handleSave = () => {
-    const editedItem = item ? { ...item, name } : { name };
+    const editedItem = item ? { ...item, text } : { text };
     saveItem && saveItem(editedItem).then(() => history.goBack());
   };
   log('render');
@@ -52,7 +52,7 @@ const ItemEdit: React.FC<ItemEditProps> = ({ history, match }) => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonInput value={name} onIonChange={e => setName(e.detail.value || '')} />
+        <IonInput value={text} onIonChange={e => setText(e.detail.value || '')} />
         <IonLoading isOpen={saving} />
         {savingError && (
           <div>{savingError.message || 'Failed to save item'}</div>

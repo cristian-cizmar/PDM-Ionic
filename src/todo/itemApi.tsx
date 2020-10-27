@@ -5,7 +5,7 @@ import { ItemProps } from './ItemProps';
 const log = getLogger('itemApi');
 
 const baseUrl = 'localhost:3000';
-const itemUrl = `http://${baseUrl}/movie`;
+const itemUrl = `http://${baseUrl}/item`;
 
 interface ResponseProps<T> {
   data: T;
@@ -58,7 +58,7 @@ export const newWebSocket = (onMessage: (data: MessageData) => void) => {
     log('web socket onclose');
   };
   ws.onerror = error => {
-    log('web socket onerror', error);
+    log('web socket onerror');
   };
   ws.onmessage = messageEvent => {
     log('web socket onmessage');
