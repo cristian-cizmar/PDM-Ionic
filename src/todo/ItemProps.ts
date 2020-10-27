@@ -1,4 +1,4 @@
 export interface ItemProps {
   id?: string;
-  text: string;
+  name: string;
 }
