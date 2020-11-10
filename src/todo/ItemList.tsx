@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { RouteComponentProps } from 'react-router';
+import { Redirect } from "react-router-dom";
 import {
   IonContent,
   IonFab,
@@ -9,31 +10,40 @@ import {
   IonList, IonLoading,
   IonPage,
   IonTitle,
-  IonToolbar
+  IonToolbar,
+  IonButton
 } from '@ionic/react';
 import { add } from 'ionicons/icons';
 import Item from './Item';
 import { getLogger } from '../core';
 import { ItemContext } from './ItemProvider';
+import { AuthContext } from '../auth';
 
 const log = getLogger('ItemList');
 
 const ItemList: React.FC<RouteComponentProps> = ({ history }) => {
-  const { items, fetching, fetchingError } = useContext(ItemContext);
+  const { items, fetching, fetchingError} = useContext(ItemContext);
+  const { logout } = useContext(AuthContext);
+  const handleLogOut = () => {
+    log('handleLogOut...');
+    logout?.();
+    return <Redirect to = "/login" />;
+  };
   log('render');
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>My App</IonTitle>
+          <IonTitle>Item List</IonTitle>
+        <IonButton onClick={handleLogOut}>Log out</IonButton>
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonLoading isOpen={fetching} message="Fetching items" />
+        <IonLoading isOpen={fetching} message="Fetching items"/>
         {items && (
           <IonList>
-            {items.map(({ id, name, length, releaseDate, isWatched}) =>
-              <Item key={id} id={id} name={name} length={length} releaseDate={releaseDate} isWatched={isWatched} onEdit={id => history.push(`/item/${id}`)} />)}
+            {items.map(({ _id, name, length, releaseDate, isWatched }) =>
+              <Item key={_id} _id={_id} name={name} length={length} releaseDate={releaseDate} isWatched={isWatched} onEdit={id => history.push(`/item/${_id}`)}/>)}
           </IonList>
         )}
         {fetchingError && (
@@ -41,7 +51,7 @@ const ItemList: React.FC<RouteComponentProps> = ({ history }) => {
         )}
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
           <IonFabButton onClick={() => history.push('/item')}>
-            <IonIcon icon={add} />
+            <IonIcon icon={add}/>
           </IonFabButton>
         </IonFab>
       </IonContent>

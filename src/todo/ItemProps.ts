@@ -1,7 +1,7 @@
 export interface ItemProps {
-  id?: string;
+  _id?: string;
   name: string;
   length: number;
-  releaseDate: string,
-  isWatched: string
+  releaseDate: string;
+  isWatched: string;
 }
