@@ -1,24 +1,24 @@
 import axios from 'axios';
 import { authConfig, baseUrl, getLogger, withLogs } from '../core';
-import { ItemProps } from './ItemProps';
+import { MovieProps } from './MovieProps';
 
 const itemUrl = `http://${baseUrl}/api/movie`;
 
-export const getItems: (token: string) => Promise<ItemProps[]> = token => {
+export const getItems: (token: string) => Promise<MovieProps[]> = token => {
   return withLogs(axios.get(itemUrl, authConfig(token)), 'getItems');
 }
 
-export const createItem: (token: string, item: ItemProps) => Promise<ItemProps[]> = (token, item) => {
+export const createItem: (token: string, item: MovieProps) => Promise<MovieProps[]> = (token, item) => {
   return withLogs(axios.post(itemUrl, item, authConfig(token)), 'createItem');
 }
 
-export const updateItem: (token: string, item: ItemProps) => Promise<ItemProps[]> = (token, item) => {
+export const updateItem: (token: string, item: MovieProps) => Promise<MovieProps[]> = (token, item) => {
   return withLogs(axios.put(`${itemUrl}/${item._id}`, item, authConfig(token)), 'updateItem');
 }
 
 interface MessageData {
   type: string;
-  payload: ItemProps;
+  payload: MovieProps;
 }
 
 const log = getLogger('ws');

@@ -13,9 +13,9 @@ import {
 } from '@ionic/react';
 import { Redirect } from "react-router-dom";
 import { getLogger } from '../core';
-import { ItemContext } from './ItemProvider';
+import { ItemContext } from './MovieProvider';
 import { RouteComponentProps } from 'react-router';
-import { ItemProps } from './ItemProps';
+import { MovieProps } from './MovieProps';
 
 const log = getLogger('ItemEdit');
 
@@ -29,7 +29,7 @@ const ItemEdit: React.FC<ItemEditProps> = ({ history, match }) => {
   const [length, setLength] = useState(0);	
   const [releaseDate, setReleaseDate] = useState('');	
   const [isWatched, setIsWatched] = useState('');
-  const [item, setItem] = useState<ItemProps>();
+  const [item, setItem] = useState<MovieProps>();
   useEffect(() => {
     log('useEffect');
     const routeId = match.params.id || '';

@@ -1,12 +1,12 @@
 import React from 'react';
 import { IonItem, IonLabel } from '@ionic/react';
-import { ItemProps } from './ItemProps';
+import { MovieProps } from './MovieProps';
 
-interface ItemPropsExt extends ItemProps {
+interface MoviePropsExt extends MovieProps {
   onEdit: (_id?: string) => void;
 }
 
-const Item: React.FC<ItemPropsExt> = ({ _id, name, length, releaseDate, isWatched, onEdit }) => {
+const Movie: React.FC<MoviePropsExt> = ({ _id, name, length, releaseDate, isWatched, onEdit }) => {
   return (
     <IonItem onClick={() => onEdit(_id)}>
       <IonLabel>{name}</IonLabel>
@@ -17,4 +17,4 @@ const Item: React.FC<ItemPropsExt> = ({ _id, name, length, releaseDate, isWatche
   );
 };
 
-export default Item;
+export default Movie;

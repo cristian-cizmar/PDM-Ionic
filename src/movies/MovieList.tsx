@@ -14,14 +14,14 @@ import {
   IonButton
 } from '@ionic/react';
 import { add } from 'ionicons/icons';
-import Item from './Item';
+import Movie from './Movie';
 import { getLogger } from '../core';
-import { ItemContext } from './ItemProvider';
+import { ItemContext } from './MovieProvider';
 import { AuthContext } from '../auth';
 
-const log = getLogger('ItemList');
+const log = getLogger('MovieList');
 
-const ItemList: React.FC<RouteComponentProps> = ({ history }) => {
+const MovieList: React.FC<RouteComponentProps> = ({ history }) => {
   const { items, fetching, fetchingError} = useContext(ItemContext);
   const { logout } = useContext(AuthContext);
   const handleLogOut = () => {
@@ -34,7 +34,7 @@ const ItemList: React.FC<RouteComponentProps> = ({ history }) => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Item List</IonTitle>
+          <IonTitle>Movies List</IonTitle>
         <IonButton onClick={handleLogOut}>Log out</IonButton>
         </IonToolbar>
       </IonHeader>
@@ -43,14 +43,14 @@ const ItemList: React.FC<RouteComponentProps> = ({ history }) => {
         {items && (
           <IonList>
             {items.map(({ _id, name, length, releaseDate, isWatched }) =>
-              <Item key={_id} _id={_id} name={name} length={length} releaseDate={releaseDate} isWatched={isWatched} onEdit={id => history.push(`/item/${_id}`)}/>)}
+              <Movie key={_id} _id={_id} name={name} length={length} releaseDate={releaseDate} isWatched={isWatched} onEdit={id => history.push(`/movie/${_id}`)}/>)}
           </IonList>
         )}
         {fetchingError && (
           <div>{fetchingError.message || 'Failed to fetch items'}</div>
         )}
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
-          <IonFabButton onClick={() => history.push('/item')}>
+          <IonFabButton onClick={() => history.push('/movie')}>
             <IonIcon icon={add}/>
           </IonFabButton>
         </IonFab>
@@ -59,4 +59,4 @@ const ItemList: React.FC<RouteComponentProps> = ({ history }) => {
   );
 };
 
-export default ItemList;
+export default MovieList;

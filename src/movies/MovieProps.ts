@@ -1,4 +1,4 @@
-export interface ItemProps {
+export interface MovieProps {
   _id?: string;
   name: string;
   length: number;

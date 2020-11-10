@@ -1,16 +1,16 @@
 import React, { useCallback, useContext, useEffect, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import { getLogger } from '../core';
-import { ItemProps } from './ItemProps';
-import { createItem, getItems, newWebSocket, updateItem } from './itemApi';
+import { MovieProps } from './MovieProps';
+import { createItem, getItems, newWebSocket, updateItem } from './MovieApi';
 import { AuthContext } from '../auth';
 
-const log = getLogger('ItemProvider');
+const log = getLogger('MovieProvider');
 
-type SaveItemFn = (item: ItemProps) => Promise<any>;
+type SaveItemFn = (item: MovieProps) => Promise<any>;
 
 export interface ItemsState {
-  items?: ItemProps[],
+  items?: MovieProps[],
   fetching: boolean,
   fetchingError?: Error | null,
   saving: boolean,
@@ -65,11 +65,11 @@ const reducer: (state: ItemsState, action: ActionProps) => ItemsState =
 
 export const ItemContext = React.createContext<ItemsState>(initialState);
 
-interface ItemProviderProps {
+interface MovieProviderProps {
   children: PropTypes.ReactNodeLike,
 }
 
-export const ItemProvider: React.FC<ItemProviderProps> = ({ children }) => {
+export const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
   const { token } = useContext(AuthContext);
   const [state, dispatch] = useReducer(reducer, initialState);
   const { items, fetching, fetchingError, saving, savingError } = state;
@@ -110,7 +110,7 @@ export const ItemProvider: React.FC<ItemProviderProps> = ({ children }) => {
     }
   }
 
-  async function saveItemCallback(item: ItemProps) {
+  async function saveItemCallback(item: MovieProps) {
     try {
       log('saveItem started');
       dispatch({ type: SAVE_ITEM_STARTED });
